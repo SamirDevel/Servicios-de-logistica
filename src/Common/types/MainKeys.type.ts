@@ -1,0 +1,1 @@
+export type MainKeys<T> = Exclude<keyof T, "id">
