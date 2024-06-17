@@ -1,7 +1,7 @@
 import { Entity, Column, OneToMany } from "typeorm";
 import BaseEntity from "./BaseEntity";
-import Viatico from "./Viaticos";
-import Presupuesto from "./Presupuesto";
+import Viatico from "./Viatico.entity";
+import Presupuesto from "./Presupuesto.entity";
 
 @Entity({name:'Conceptos'})
 export default class Concepto extends BaseEntity{

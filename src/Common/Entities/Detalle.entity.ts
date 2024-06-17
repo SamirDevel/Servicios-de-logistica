@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
 import BaseEntity from "./BaseEntity";
-import Ruta from "./Ruta";
-import Entrega from "./Entrega";
+import Ruta from "./Ruta.entity";
+import Entrega from "./Entrega.entity";
 
 @Entity({name:'Detalles_Ruta'})
 export default class DetalleRuta extends BaseEntity{

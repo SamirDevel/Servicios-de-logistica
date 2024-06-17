@@ -1,7 +1,7 @@
 import { Entity, Column, JoinColumn, OneToOne } from "typeorm";
 import BaseEntity from "./BaseEntity";
 import { decimalConfig } from "../Utilities/Tools/Functions";
-import Ruta from "./Ruta";
+import Ruta from "./Ruta.entity";
 
 @Entity({name:'Checkouts'})
 export default class Checkout extends BaseEntity{

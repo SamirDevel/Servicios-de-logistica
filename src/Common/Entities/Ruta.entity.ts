@@ -1,14 +1,14 @@
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import BaseEntity from "./BaseEntity";
-import Chofer from "./Chofer";
-import Vehiculo from "./Vehiculo";
-import Viatico from "./Viaticos";
+import Chofer from "./Chofer.entity";
+import Vehiculo from "./Vehiculo.entity";
+import Viatico from "./Viatico.entity";
 import { decimalConfig } from "../Utilities/Tools/Functions";
-import Presupuesto from "./Presupuesto";
-import Checkout from "./Checkout";
-import Entrega from "./Entrega";
-import DetalleRuta from "./Detalle";
-import Estado from "./Estado";
+import Presupuesto from "./Presupuesto.entity";
+import Checkout from "./Checkout.entity";
+import Entrega from "./Entrega.entity";
+import DetalleRuta from "./Detalle.entity";
+import Estado from "./Estado.entity";
 
 @Entity({name:'Rutas'})
 export default class Ruta extends BaseEntity{
@@ -26,7 +26,12 @@ export default class Ruta extends BaseEntity{
     
     @Column('decimal' , decimalConfig('Gas_Inicio'))
     GasI:number
-    //foto
+
+    @Column({name:'Foto'})
+    foto:string
+
+    @Column({name:'Incidencia'})
+    incidencia?:string|null
     
     @JoinColumn({name:'Id_Chofer'})
     @ManyToOne(()=>Chofer, cho=>cho.rutas)
@@ -49,8 +54,8 @@ export default class Ruta extends BaseEntity{
     @OneToMany(()=>DetalleRuta, det=>det.idRuta)
     detalles:DetalleRuta[]
 
-    @OneToOne(()=>Presupuesto, pre=>pre.idRuta)
-    presupuesto:Presupuesto
+    @OneToMany(()=>Presupuesto, pre=>pre.idRuta)
+    presupuestos:Presupuesto[]
 
     @OneToOne(()=>Checkout, che=>che.idRuta)
     checkout:Checkout

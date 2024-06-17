@@ -1,6 +1,6 @@
 import { Entity, Column, OneToMany } from "typeorm";
 import BaseEntity from "./BaseEntity";
-import Ruta from "./Ruta";
+import Ruta from "./Ruta.entity";
 
 @Entity({name:'Vehiculos'})
 export default class Vehiculo extends BaseEntity{
