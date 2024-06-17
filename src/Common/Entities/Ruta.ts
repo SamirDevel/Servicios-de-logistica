@@ -8,6 +8,7 @@ import Presupuesto from "./Presupuesto";
 import Checkout from "./Checkout";
 import Entrega from "./Entrega";
 import DetalleRuta from "./Detalle";
+import Estado from "./Estado";
 
 @Entity({name:'Rutas'})
 export default class Ruta extends BaseEntity{
@@ -34,6 +35,10 @@ export default class Ruta extends BaseEntity{
     @JoinColumn({name:'Id_Vehiculo'})
     @ManyToOne(()=>Vehiculo, veh=>veh.rutas)
     vehciculo:Vehiculo
+
+    @JoinColumn({name:'Id_Estado'})
+    @ManyToOne(()=>Estado, est=>est.rutas)
+    estado:Estado
 
     @OneToMany(()=>Viatico, via=>via.idRuta)
     viaticos:Viatico[]
