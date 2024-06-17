@@ -1,6 +1,8 @@
-export default class MainQueryBuilder<T, U=undefined>{
-    constructor(
 
+
+export default abstract class MainQueryBuilder<T, U=undefined>{
+    constructor(
+        protected builder
     ) {
 
     }
@@ -27,5 +29,9 @@ export default class MainQueryBuilder<T, U=undefined>{
 
     join(){
         
+    }
+
+    save(){
+
     }
 }

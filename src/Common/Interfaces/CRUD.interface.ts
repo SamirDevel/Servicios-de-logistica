@@ -1,9 +1,9 @@
-import { MainKeys } from "../types/MainKeys.type";
+import { MainKeys } from "../types/Keys.types";
+import MainError from "./Error.interface";
 
 export default interface CRUD<T>{
-    create:(data: MainKeys<T>)=> Promise<string>;
-    read:(filters: Partial<T>)=> Promise<T[]> 
-    update:(filters: Partial<T>, data: Partial<T>)=>Promise<string>;
-    delete?:(id: number)=> Promise<string>;
-    alias:string
+    create:(data: MainKeys<T>, message:string)=> Promise<string|MainError>;
+    read:(filters: Partial<T>)=> Promise<T[]|MainError> 
+    update:(id:number, data: Partial<T>)=>Promise<string|MainError>;
+    delete?:(id: number)=> Promise<string|MainError>;
 }
