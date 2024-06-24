@@ -5,10 +5,6 @@ import Entrega from "./Entrega.entity";
 
 @Entity({name:'Detalles_Ruta'})
 export default class DetalleRuta extends BaseEntity{
-    @JoinColumn({name:'Id_Ruta'})
-    @ManyToOne(()=>Ruta, rut=>rut.detalles)
-    idRuta:Ruta
-
     @JoinColumn({name:'Id_Entrega'})
     @ManyToOne(()=>Entrega, ent=>ent.detalles)
     entrega:Entrega

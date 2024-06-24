@@ -1,20 +1,18 @@
-export default class Result<T>{
-    isSuccess:boolean
-    constructor(
-        private failureMessage:string,
+import MainError from "src/Common/Interfaces/Error.interface";
 
+export default class Result<T>{
+    constructor(
+        public readonly value: T,
+        public readonly isSuccess:boolean,
+        public readonly error?:MainError
     ){
 
     }
-    execute(callback:Function){
-        this.isSuccess = callback();
+
+    static Success<T>(value:T){
+        return new Result(value, true)
     }
-
-    private success(){
-
-    }
-
-    private failure(){
-
+    static Failure<T>(error:MainError){
+        return new Result<T>(null, false, error);
     }
 }
