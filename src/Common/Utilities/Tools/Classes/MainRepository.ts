@@ -13,10 +13,10 @@ export default class MainRepository<T> implements CRUD<T>{
     ){
 
     }
-    async create(data: MainObject<T>, successMessage:string){
+    async create(data: Partial<MainObject<T>>, successMessage:string){
         const newT = this.repo.create(data as T);
+        console.log(newT)
         await this.repo.save(newT);
-        //console.log(newT)
         return successMessage
     }
     private makeFilters(values:Partial<T>){

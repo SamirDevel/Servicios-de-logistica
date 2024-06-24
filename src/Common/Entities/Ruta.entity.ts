@@ -33,26 +33,29 @@ export default class Ruta extends BaseEntity{
     @Column({name:'Incidencia'})
     incidencia?:string|null
     
-    @JoinColumn({name:'Id_Chofer'})
+    /*@JoinColumn({name:'Id_Chofer'})
     @ManyToOne(()=>Chofer, cho=>cho.rutas)
     chofer:Chofer
     
     @JoinColumn({name:'Id_Vehiculo'})
     @ManyToOne(()=>Vehiculo, veh=>veh.rutas)
-    vehciculo:Vehiculo
+    vehciculo:Vehiculo*/
 
     @JoinColumn({name:'Id_Estado'})
     @ManyToOne(()=>Estado, est=>est.rutas)
     estado:Estado
+
+    @Column({name:'Chofer'})
+    chofer:string
+
+    @Column({name:'vehciculo'})
+    vehciculo:string
 
     @OneToMany(()=>Viatico, via=>via.idRuta)
     viaticos:Viatico[]
 
     @OneToMany(()=>Entrega, ent=>ent.idRuta)
     entregas:Entrega[]
-
-    @OneToMany(()=>DetalleRuta, det=>det.idRuta)
-    detalles:DetalleRuta[]
 
     @OneToMany(()=>Presupuesto, pre=>pre.idRuta)
     presupuestos:Presupuesto[]

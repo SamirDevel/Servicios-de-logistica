@@ -1,3 +1,5 @@
+import { MainObject } from 'src/Common/types/Keys.types'
+
 export function  decimalConfig(name:string){
     return {
         name,
@@ -5,3 +7,5 @@ export function  decimalConfig(name:string){
         scale:2
     }
 }
+
+export * as fns from './Functions'

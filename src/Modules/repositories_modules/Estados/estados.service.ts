@@ -4,19 +4,22 @@ import RepositoryService from "../../../Common/Utilities/Tools/Classes/Repositor
 import { Repository } from "typeorm";
 import { BooleanExpression } from "src/Common/Interfaces/BooleanInterfaces.interface";
 import { MainKeys, MainObject } from "src/Common/types/Keys.types";
+import { InjectRepository } from '@nestjs/typeorm';
 
+type dto = Omit<MainObject<Estado>, 'rutas'|'choferes'>
 @Injectable()
-export default class EstadoService extends RepositoryService<Estado>{
+export class EstadosService extends RepositoryService<Estado>{
     constructor(
-        repoBase:Repository<Estado>,
+        @InjectRepository(Estado, 'des') repoBase:Repository<Estado>,
     ){
         const options:BooleanExpression<Estado>[] = [
             {variable:'nombre', operator:'=', alias:'nombreEst'},
             {variable:'descripcion', operator:'=', alias:'usuarioEst'},
+            {variable:'id', operator:'=', alias:'idEst'}
         ]
         super(repoBase, 'Est', options)
     }
-    async create(data: MainObject<Estado>): Promise<string> {
+    async create(data: dto): Promise<string> {
         return await this.repo.create(data, 'Estado creado con éxito')
     } 
     async read(filters: Partial<Estado>, columns: MainKeys<Estado>[]): Promise<Estado[]> {
