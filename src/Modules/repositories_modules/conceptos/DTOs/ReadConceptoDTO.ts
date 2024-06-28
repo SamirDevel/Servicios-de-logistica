@@ -1,9 +1,9 @@
-import { IsNumber, IsOptional, IsString } from "class-validator";
+import { IsNumber, IsNumberString, IsOptional, IsString } from "class-validator";
 import Concepto from "src/Common/Entities/Concepto.entity";
 
 export default class ReadConceptoDTO implements Partial<Concepto>{
     @IsOptional()
-    @IsNumber()
+    @IsNumberString()
     id: number;
     
     @IsOptional()
