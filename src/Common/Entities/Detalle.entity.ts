@@ -16,5 +16,5 @@ export default class DetalleRuta extends BaseEntity{
     serie:string
 
     @Column({name:'Folio'})
-    folio:string
+    folio:number
 }

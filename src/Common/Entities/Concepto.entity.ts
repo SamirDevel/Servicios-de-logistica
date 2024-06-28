@@ -15,5 +15,5 @@ export default class Concepto extends BaseEntity{
     viaticos:Viatico[]
 
     @OneToMany(()=>Presupuesto, pre=>pre.idConcepto)
-    presupuesto:Presupuesto[]
+    presupuestos:Presupuesto[]
 }

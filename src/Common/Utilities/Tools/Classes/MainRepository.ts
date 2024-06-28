@@ -15,7 +15,7 @@ export default class MainRepository<T> implements CRUD<T>{
     }
     async create(data: Partial<MainObject<T>>, successMessage:string){
         const newT = this.repo.create(data as T);
-        console.log(newT)
+        //console.log(newT)
         await this.repo.save(newT);
         return successMessage
     }

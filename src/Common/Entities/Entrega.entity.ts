@@ -7,7 +7,7 @@ import DetalleRuta from "./Detalle.entity";
 export default class Entrega extends BaseEntity{
     @JoinColumn({name:'Id_Ruta'})
     @ManyToOne(()=>Ruta, rut=>rut.entregas)
-    idRuta:Ruta
+    ruta:Ruta
 
     @Column({name:'Cliente'})
     cliente:string
@@ -20,7 +20,7 @@ export default class Entrega extends BaseEntity{
     calle:string
 
     @Column({name:'Interior'})
-    interior:string
+    interior?:string
 
     @Column({name:'Exterior'})
     exterior:string

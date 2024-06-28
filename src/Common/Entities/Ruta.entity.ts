@@ -49,12 +49,12 @@ export default class Ruta extends BaseEntity{
     chofer:string
 
     @Column({name:'vehciculo'})
-    vehciculo:string
+    vehiculo:string
 
     @OneToMany(()=>Viatico, via=>via.idRuta)
     viaticos:Viatico[]
 
-    @OneToMany(()=>Entrega, ent=>ent.idRuta)
+    @OneToMany(()=>Entrega, ent=>ent.ruta)
     entregas:Entrega[]
 
     @OneToMany(()=>Presupuesto, pre=>pre.idRuta)

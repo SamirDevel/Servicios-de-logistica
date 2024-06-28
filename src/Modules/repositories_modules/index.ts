@@ -1,11 +1,13 @@
 import { CuentasModule } from "./cuentas/cuentas.module"
 import { EstadosModule } from "./estados/estados.module"
-import { ChoferesModule } from "./choferes/choferes.module"
+import { RutasModule } from "./rutas/rutas.module"
+import { ConceptosModule } from "./conceptos/conceptos.module"
 
 const repositoriesModules:any[] = [
+    ConceptosModule,
     CuentasModule,
     EstadosModule,
-    ChoferesModule
+    RutasModule
 ]
 
 export default repositoriesModules

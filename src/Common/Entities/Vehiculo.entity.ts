@@ -19,6 +19,6 @@ export default class Vehiculo extends BaseEntity{
     @Column({name:'Placas'})
     placas:string
 
-    @OneToMany(()=>Ruta, rut=>rut.vehciculo)
+    @OneToMany(()=>Ruta, rut=>rut.vehiculo)
     rutas:Ruta[]
 } 

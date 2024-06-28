@@ -15,7 +15,7 @@ export default abstract class RepositoryService<T> implements CRUD<T>{
     ){
         this.repo = new MainRepository<T>(this.repoBase, alias, whereOptions)
     }
-    abstract create(data: MainObject<T>, message: string):Promise<string>;
+    abstract create(data: MainObject<T>):Promise<string|T>;
     abstract read(filters: Partial<T>, columns: MainKeys<T>[]):Promise<T[]>;
     abstract update(id: number, data: Partial<T>):Promise<string>;
 }

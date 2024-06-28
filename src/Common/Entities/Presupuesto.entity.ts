@@ -11,7 +11,7 @@ export default class Presupuesto extends BaseEntity{
     idRuta:Ruta
     
     @JoinColumn({name:'Id_Concepto'})
-    @ManyToOne(()=>Concepto, con=>con.presupuesto)
+    @ManyToOne(()=>Concepto, con=>con.presupuestos)
     idConcepto:Concepto
 
     @Column('decimal' , decimalConfig('Presupuesto'))
