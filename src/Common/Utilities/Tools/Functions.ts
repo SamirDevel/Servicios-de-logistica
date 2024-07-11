@@ -1,4 +1,4 @@
-import { MainObject } from 'src/Common/types/Keys.types'
+
 
 export function  decimalConfig(name:string){
     return {

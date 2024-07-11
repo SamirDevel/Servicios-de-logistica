@@ -11,8 +11,8 @@ export default abstract class RepositoryController<T> implements CRUD<T>{
     ){
 
     }
-    abstract create(data: MainObject<T>):Promise<string|MainError>;
-    abstract read(filters: Partial<T>):Promise<T[]|MainError>;
+    abstract create(data: MainObject<T>|any):Promise<string|MainError>;
+    abstract read(filters: Partial<T>|any):Promise<T[]|MainError>;
     abstract update(id: number, data: Partial<T>):Promise<string|MainError>;
         
     protected async  executeSQL<T>(callback:Function, errorMessage:string):Promise<MainError|T>{

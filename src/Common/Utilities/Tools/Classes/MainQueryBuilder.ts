@@ -3,14 +3,15 @@ import { QueryBuilderTypes, WhereQueryBuilder } from "src/Common/types/Builder.t
 import { MainKeys } from "src/Common/types/Keys.types";
 import { SelectQueryBuilder } from "typeorm";
 
-export default class MainQueryBuilder<T, U=undefined>{
-    protected _parent:MainQueryBuilder<U>|MainQueryBuilder<T>
+export default class MainQueryBuilder<T>{
+    protected _parent:MainQueryBuilder<any>
     constructor(
-        protected builder:QueryBuilderTypes<T>,
+        protected builder:QueryBuilderTypes<any>,
         protected _alias:string,
-        parent?:MainQueryBuilder<U>|MainQueryBuilder<T>
+        parent?:MainQueryBuilder<any>
+        
     ) {
-        this._parent = parent!==undefined?parent:null
+        if(parent===undefined)parent=null
     }
 
     public get alias(){
@@ -19,7 +20,6 @@ export default class MainQueryBuilder<T, U=undefined>{
     public get parent(){
         return this._parent
     }
-
 
     select(){
         this.builder = this.builder.select(`${this.alias}.id`);
@@ -46,7 +46,18 @@ export default class MainQueryBuilder<T, U=undefined>{
         return (this.builder as SelectQueryBuilder<T>).getRawMany()
     }
 
+    join<U>(alias:string, key:keyof T){
+        (this.builder as SelectQueryBuilder<T>)
+            .leftJoin(`${this._alias}.${key.toString()}`, alias)
+            .addSelect(`${alias}.id`);
+        return new MainQueryBuilder<U>(this.builder, alias, this)
+    }
+
     back(){
-        return new MainQueryBuilder<T>(this.builder as undefined, this._parent.alias, this._parent.parent)
+        return new MainQueryBuilder(this.builder, this.parent.alias, this.parent.parent);
+    }
+
+    debug(){
+        return this.builder.getQueryAndParameters();
     }
 }

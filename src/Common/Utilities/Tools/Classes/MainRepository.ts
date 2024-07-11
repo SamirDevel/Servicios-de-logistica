@@ -3,7 +3,7 @@ import CRUD from "../../../../Common/Interfaces/CRUD.interface";
 import { MainKeys, MainObject } from "../../../types/Keys.types";
 import MainQueryBuilder from "./MainQueryBuilder";
 import { BooleanExpression } from "src/Common/Interfaces/BooleanInterfaces.interface";
-import { ErrorsService } from "src/Modules/Areas/errors/errors.service";
+import { JoinInterface } from "src/Common/Interfaces/JoinInterface";
 
 export default class MainRepository<T> implements CRUD<T>{
     constructor(
@@ -19,34 +19,72 @@ export default class MainRepository<T> implements CRUD<T>{
         await this.repo.save(newT);
         return successMessage
     }
-    private makeFilters(values:Partial<T>){
-        const list = this.whereOption
-        const filters:Required<BooleanExpression<T>>[] = new Array();
-        for(const i in list){
-            const {variable, operator, alias} = list[i];
-            if(values[variable]!==undefined)
-                filters.push({
-                    variable,
-                    operator,
-                    value:values[variable],
-                    alias,
-                })
-        }
-        return filters;
-    }
-    async read(values: Partial<T>, columns:MainKeys<T>[]){
-        const qb = this.getQb();
-        qb.select()
+
+    buildSelect<U>(qb:MainQueryBuilder<U>, columns:MainKeys<U>[]){
         for(const i in columns){
             const column = columns[i];
             qb.addSelect(column);
         }
-        const filters = this.makeFilters(values);
-        for(const i in filters){
-            const filter = filters[i];
-            qb.addWhere(filter);
+        return qb;
+    }
+    private getTypedData<U>(option:BooleanExpression<T>|BooleanExpression<U>, values:any){
+        const {variable, operator, alias} = option
+        const value = values[variable]
+        return {
+            variable,
+            operator,
+            value,
+            alias
         }
-        return qb.getMany()
+    }
+
+    private makeFilters(values:Partial<T>){
+        const list = this.whereOption
+        const filters:Required<BooleanExpression<T>>[] = new Array();
+        for(const option of list){
+            const newFilter = this.getTypedData(option, values)
+            filters.push(newFilter)
+        }
+        return filters
+    }
+    
+    buildFilters<U>(qb:MainQueryBuilder<T>|MainQueryBuilder<U>, values:Partial<T>, joinList?:Required<BooleanExpression<U>>[]){
+        const IsU = joinList!==undefined
+        const filters =  IsU
+            ?joinList
+            :this.makeFilters(values)
+        for(const filter of filters){
+            if(IsU===true){
+                if(filter.value!==undefined)(qb as MainQueryBuilder<U>).addWhere(filter as Required<BooleanExpression<U>>);
+            }else{
+                if(filter.value!==undefined){
+                    (qb as MainQueryBuilder<T>).addWhere(filter as Required<BooleanExpression<T>>)
+                };
+            }
+        }
+        //console.log(qb.debug())
+        return qb
+    }
+    private join<U>(query:MainQueryBuilder<T>|MainQueryBuilder<U>, joins:JoinInterface<T,U>[]){
+        for(const join of joins){
+            console.log(join)
+            const joined = query.join<U>(join.alias, join.origin as any);
+            const joinedSelected = this.buildSelect<U>(joined, join.selections)
+            const joinedFiltred = this.buildFilters<U>(joinedSelected, undefined, join.filters)
+            if(join.joins!==undefined)this.join(joinedFiltred, join.joins as any)
+        }
+        return query;
+    }
+    async read<U=undefined>(values: Partial<T>, columns:MainKeys<T>[], joins?:JoinInterface<T,U>[]){
+        const qb = this.getQb();
+        qb.select()
+        const qbSelected = this.buildSelect(qb, columns)
+        const qbFiltred = this.buildFilters(qbSelected, values)
+        if(joins!==undefined){
+            this.join<U>(qbFiltred, joins)
+        }
+        console.log(qbFiltred.debug())
+        return qbFiltred.getMany()
     }
     update: (id: number, data: Partial<T>) => Promise<string>;
     //abstract delete?: (id: number) => Promise<string>;
