@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import Concepto from 'src/Common/Entities/Concepto.entity';
-import { BooleanExpression } from 'src/Common/Interfaces/BooleanInterfaces.interface';
-import RepositoryService from 'src/Common/Utilities/Tools/Classes/RepositoryService';
-import { MainKeys, MainObject } from 'src/Common/types/Keys.types';
+import Concepto from '../../../Common/Entities/Concepto.entity';
+import { BooleanExpression } from '../../../Common/Interfaces/BooleanInterfaces.interface';
+import RepositoryService from '../../../Common/Utilities/Tools/Classes/RepositoryService';
+import { MainKeys, MainObject } from '../../../Common/types/Keys.types';
 import { Repository } from 'typeorm';
 
 type dto = Omit<MainObject<Concepto>, 'viaticos'|'presupuestos'>

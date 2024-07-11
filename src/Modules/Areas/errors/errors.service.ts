@@ -1,5 +1,5 @@
-import MainError from 'src/Common/Interfaces/Error.interface';
-import Result from 'src/Common/Utilities/Tools/Classes/Result';
+import MainError from '../../../Common/Interfaces/Error.interface';
+import Result from '../../../Common/Utilities/Tools/Classes/Result';
 
 async function test<T>(callback:Function, errorData:MainError):Promise<Result<T>>{
     try {

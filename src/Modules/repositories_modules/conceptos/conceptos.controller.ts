@@ -1,10 +1,8 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import Concepto from 'src/Common/Entities/Concepto.entity';
-import RepositoryService from 'src/Common/Utilities/Tools/Classes/RepositoryService';
+import Concepto from '../../../Common/Entities/Concepto.entity';
 import { ConceptosService } from './conceptos.service';
-import RepositoryController from 'src/Common/Utilities/Tools/Classes/RepositoryController';
-import MainError from 'src/Common/Interfaces/Error.interface';
-import { MainObject } from 'src/Common/types/Keys.types';
+import RepositoryController from '../../../Common/Utilities/Tools/Classes/RepositoryController';
+import MainError from '../../../Common/Interfaces/Error.interface';
 import ReadConceptoDTO from './DTOs/ReadConceptoDTO';
 import CreateConceptoDTO from './DTOs/CreateConceptoDTO';
 
