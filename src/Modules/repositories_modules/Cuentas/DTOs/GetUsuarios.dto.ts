@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsNumberString, IsOptional, IsString } from "class-validator";
 import Cuenta from "src/Common/Entities/Cuenta.entity";
 
 export default class GetUsuariosDTO implements Partial<Cuenta>{
@@ -7,6 +7,6 @@ export default class GetUsuariosDTO implements Partial<Cuenta>{
     nombre: string;
 
     @IsOptional()
-    @IsString()
-    id: Number;
+    @IsNumberString()
+    id: number;
 }

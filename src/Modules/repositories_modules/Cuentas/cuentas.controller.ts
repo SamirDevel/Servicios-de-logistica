@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { CuentasService } from './cuentas.service';
 import CrearUsuarioDTO from './DTOs/CrearUsuario.dto';
 import GetUsuariosDTO from './DTOs/GetUsuarios.dto';
-import RepositorController from 'src/Common/Utilities/Tools/Classes/RepositoryController';
-import Cuenta from 'src/Common/Entities/Cuenta.entity';
-import MainError from 'src/Common/Interfaces/Error.interface';
+import RepositorController from '../../../Common/Utilities/Tools/Classes/RepositoryController';
+import Cuenta from '../../../Common/Entities/Cuenta.entity';
+import MainError from '../../../Common/Interfaces/Error.interface';
 
 @Controller('cuentas')
 export class CuentasController extends RepositorController<Cuenta> {
