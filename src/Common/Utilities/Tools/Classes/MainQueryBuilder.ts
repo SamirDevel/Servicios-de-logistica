@@ -1,4 +1,4 @@
-import { BooleanExpression } from "src/Common/Interfaces/BooleanInterfaces.interface";
+import  BooleanExpression  from "src/Common/Interfaces/BooleanInterfaces.interface";
 import { QueryBuilderTypes, WhereQueryBuilder } from "src/Common/types/Builder.types";
 import { MainKeys } from "src/Common/types/Keys.types";
 import { SelectQueryBuilder } from "typeorm";
@@ -31,7 +31,7 @@ export default class MainQueryBuilder<T>{
         return this
     }
 
-    addWhere(filter:Required<BooleanExpression<T>>){
+    addWhere(filter:BooleanExpression<T>){
         const {variable, operator, alias, value} = filter;
         (this.builder as WhereQueryBuilder<T>)
             .andWhere(`${this.alias}.${variable.toString()} ${operator} :${alias}`, {[alias]:value})

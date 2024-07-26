@@ -4,7 +4,7 @@ export default class Result<T>{
     constructor(
         public readonly value: T,
         public readonly isSuccess:boolean,
-        public readonly error?:MainError
+        public readonly error?:string
     ){
 
     }
@@ -12,7 +12,7 @@ export default class Result<T>{
     static Success<T>(value:T){
         return new Result(value, true)
     }
-    static Failure<T>(error:MainError){
+    static Failure<T>(error:string){
         return new Result<T>(null, false, error);
     }
 }

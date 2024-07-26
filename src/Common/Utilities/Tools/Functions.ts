@@ -1,5 +1,3 @@
-
-
 export function  decimalConfig(name:string){
     return {
         name,

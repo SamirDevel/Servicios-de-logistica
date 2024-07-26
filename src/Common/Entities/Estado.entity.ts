@@ -2,6 +2,7 @@ import { Entity, Column, OneToMany } from "typeorm";
 import BaseEntity from "./BaseEntity";
 import Ruta from "./Ruta.entity";
 import Chofer from "./Chofer.entity";
+import Vehiculo from "./Vehiculo.entity";
 
 @Entity({name:'Estados'})
 export default class Estado extends BaseEntity{
@@ -16,4 +17,7 @@ export default class Estado extends BaseEntity{
 
     @OneToMany(()=>Chofer, cho=>cho.estado)
     choferes:Chofer[]
+
+    @OneToMany(()=>Vehiculo, veh=>veh.estado)
+    vehiculos:Vehiculo[]
 }

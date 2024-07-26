@@ -2,6 +2,7 @@ import { Entity, Column, JoinColumn, OneToOne } from "typeorm";
 import BaseEntity from "./BaseEntity";
 import { decimalConfig } from "../Utilities/Tools/Functions";
 import Ruta from "./Ruta.entity";
+import Foto from "./Foto.entity";
 
 @Entity({name:'Checkouts'})
 export default class Checkout extends BaseEntity{
@@ -20,4 +21,8 @@ export default class Checkout extends BaseEntity{
     @JoinColumn({name:'Id_Ruta'})
     @OneToOne(()=>Ruta, rut=>rut.checkout)
     idRuta:Ruta
+
+    @JoinColumn({name:'Id_Checkout'})
+    @OneToOne(()=>Foto, fot=>fot.checkout)
+    foto:Foto
 }

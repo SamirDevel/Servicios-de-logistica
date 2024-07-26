@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import modulesList from './Modules';
 import { ORMModule } from './Common/Config/TypeormModule';
-import { ConceptosModule } from './modules/repositories_modules/conceptos/conceptos.module';
 
 @Module({
   imports: [

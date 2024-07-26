@@ -5,6 +5,7 @@ import Cuenta from "./Cuenta.entity";
 import DetalleRuta from "./Detalle.entity";
 import Entrega from "./Entrega.entity";
 import Estado from "./Estado.entity";
+import Foto from "./Foto.entity";
 import Presupuesto from "./Presupuesto.entity";
 import Ruta from "./Ruta.entity";
 import Vehiculo from "./Vehiculo.entity";
@@ -20,7 +21,8 @@ const entidadesList:any = [
     Entrega,
     Estado, Presupuesto, Ruta,
     Vehiculo,
-    Viatico
+    Viatico,
+    Foto
 ]
 
 export default entidadesList

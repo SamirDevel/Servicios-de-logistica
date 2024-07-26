@@ -1,7 +1,8 @@
-import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import BaseEntity from "./BaseEntity";
 import Ruta from "./Ruta.entity";
 import DetalleRuta from "./Detalle.entity";
+import Foto from "./Foto.entity";
 
 @Entity({name:'Entregas'})
 export default class Entrega extends BaseEntity{
@@ -37,7 +38,11 @@ export default class Entrega extends BaseEntity{
     @Column({name:'Url'})
     url:string
 
-    @OneToMany(()=>DetalleRuta, det=>det.entrega)
+    @JoinColumn({name:'Id_Foto'})
+    @OneToOne(()=>Foto, fot=>fot.entrega, {cascade:true})
+    foto:Foto
+
+    @OneToMany(()=>DetalleRuta, det=>det.entrega, {cascade:true})
     detalles:DetalleRuta[]
 
 }

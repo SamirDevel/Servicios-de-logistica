@@ -1,5 +1,5 @@
 import { MainKeys } from "../types/Keys.types"
-import { BooleanExpression } from "./BooleanInterfaces.interface"
+import BooleanExpression from "./BooleanInterfaces.interface"
 export interface JoinInterface<T, U>{
     alias:string
     selections:MainKeys<U>[]
