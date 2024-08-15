@@ -1,1 +1,1 @@
-export type BooleanOperator = "="|">="|"<="|"<"|">";
+export type BooleanOperator = "="|">="|"<="|"<"|">"|"!="|"IS NOTs";

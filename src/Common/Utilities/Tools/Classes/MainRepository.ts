@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 import CRUD from "../../../../Common/Interfaces/CRUD.interface";
 import { MainKeys, MainObject } from "../../../types/Keys.types";
 import MainQueryBuilder from "./MainQueryBuilder";
@@ -6,18 +6,26 @@ import  BooleanExpression  from "src/Common/Interfaces/BooleanInterfaces.interfa
 import { JoinInterface } from "src/Common/Interfaces/JoinInterface";
 import Result from "./Result";
 
-export default class MainRepository<T> implements CRUD<T>{
+export default class MainRepository<T> implements CRUD{
     constructor(
         private repo:Repository<T>,
         protected alias: string,
     ){
 
     }
-    async create(data: Partial<MainObject<T>>, successMessage:string):Promise<Result<String>>{
+    async create(data: Partial<MainObject<T>>):Promise<Result<T>>{
         try {
             const newT = this.repo.create(data as T);
-            await this.repo.save(newT);
-            return Result.Success(successMessage)
+            return Result.Success(newT)
+        } catch (error) {
+            return Result.Failure(error.message)
+        }
+    }
+
+    async save(data:DeepPartial<T>):Promise<Result<T>>{
+        try {
+            const result = await this.repo.save(data);
+            return Result.Success(result)
         } catch (error) {
             return Result.Failure(error)
         }
@@ -58,9 +66,10 @@ export default class MainRepository<T> implements CRUD<T>{
                 this.join<U>(qb, joins)
             }
             const list = await qb.getMany();
+            if(list.length===0)return Result.Failure('La busqueda no arrojo resultados')
             return Result.Success(list)
         } catch (error) {
-            return Result.Failure(error)           
+            return Result.Failure(error.message)           
         }
     }
     update: (id: number, data: Partial<T>) => Promise<Result<any>>;

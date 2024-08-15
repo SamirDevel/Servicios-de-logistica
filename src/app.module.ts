@@ -7,7 +7,7 @@ import { ORMModule } from './Common/Config/TypeormModule';
 @Module({
   imports: [
     ORMModule,
-    ...modulesList,
+    ...modulesList
   ],
   controllers: [AppController],
   providers: [AppService],

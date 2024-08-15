@@ -2,7 +2,7 @@ import { Entity, Column, ManyToOne, JoinColumn, OneToOne } from "typeorm";
 import BaseEntity from "./BaseEntity";
 import Ruta from "./Ruta.entity";
 import Concepto from "./Concepto.entity";
-import { decimalConfig } from "../Utilities/Tools/Functions";
+import { decimalConfig } from "../../Utilities/Tools/Functions";
 import Foto from "./Foto.entity";
 
 @Entity({name:'Viaticos'})

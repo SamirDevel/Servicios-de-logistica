@@ -3,7 +3,7 @@ import BaseEntity from "./BaseEntity";
 //import Chofer from "./Chofer.entity";
 //import Vehiculo from "./Vehiculo.entity";
 import Viatico from "./Viatico.entity";
-import { decimalConfig } from "../Utilities/Tools/Functions";
+import { decimalConfig } from "../../Utilities/Tools/Functions";
 import Presupuesto from "./Presupuesto.entity";
 import Checkout from "./Checkout.entity";
 import Entrega from "./Entrega.entity";

@@ -1,6 +1,6 @@
 import { Entity, Column, JoinColumn, OneToOne } from "typeorm";
 import BaseEntity from "./BaseEntity";
-import { decimalConfig } from "../Utilities/Tools/Functions";
+import { decimalConfig } from "../../Utilities/Tools/Functions";
 import Ruta from "./Ruta.entity";
 import Foto from "./Foto.entity";
 

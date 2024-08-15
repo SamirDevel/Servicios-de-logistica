@@ -6,17 +6,24 @@ import MainError from "src/Common/Interfaces/Error.interface";
 import { MainKeys, MainObject } from "src/Common/types/Keys.types";
 import Result from "./Result";
 
-export default abstract class RepositoryService<T> implements CRUD<T>{
+export default class RepositoryService<T> implements CRUD{
     protected repo:MainRepository<T>
     constructor(
-        protected repoBase:Repository<T>,
+        repoBase:Repository<T>,
         alias:string,
     ){
-        this.repo = new MainRepository<T>(this.repoBase, alias)
+        this.repo = new MainRepository<T>(repoBase, alias)
     }
-    abstract create<J>(data: any, extras?:any):Promise<Result<T>>|Promise<Result<J>>;
-    abstract read<J>(filters: any, columns: MainKeys<T>[], extras?:any):Promise<Result<T>>|Promise<Result<J>>;
-    abstract update<J>(id: number, data:any, extras?:any):Promise<Result<T>>|Promise<Result<J>>;
+    async create(data: Partial<T>):Promise<Result<T>>{
+        const entity = await this.repo.create(data)
+        if(entity.isSuccess)return await this.repo.save(entity.value)
+        return entity
+    }
+    async  read(filters: BooleanExpression<T>[], columns: MainKeys<T>[], extras?:any):Promise<Result<T[]>>{
+        return await this.repo.read(filters, columns)
+        
+    }
+    update: <J>(id: number, data:any, extras?:any)=>Promise<Result<T>>|Promise<Result<J>>;
 
     protected updateObject(origin:T, data:Partial<T>){
         const keys = Object.keys(data);
